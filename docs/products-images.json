@@ -1,0 +1,142 @@
+[
+  {
+    "producto": "Laptop Pro 15",
+    "descripcion": "Portatil de alto rendimiento con 16GB RAM y 512GB SSD",
+    "precio": "1299.99",
+    "stock": 10,
+    "imagen": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Wireless Mouse",
+    "descripcion": "Raton inalambrico ergonomico con bateria de 12 meses",
+    "precio": "29.99",
+    "stock": 50,
+    "imagen": "https://images.unsplash.com/photo-1709528922659-8f86b0f02b9b?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Mechanical Keyboard",
+    "descripcion": "Teclado mecanico TKL con switches Cherry MX",
+    "precio": "89.99",
+    "stock": 30,
+    "imagen": "https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "USB-C Hub 7-in-1",
+    "descripcion": "Hub compacto con HDMI, USB 3.0 y lector de tarjetas SD",
+    "precio": "49.99",
+    "stock": 40,
+    "imagen": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Monitor 4K 27\"",
+    "descripcion": "Monitor IPS 4K de 27 pulgadas con soporte HDR",
+    "precio": "399.99",
+    "stock": 15,
+    "imagen": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Webcam 1080p",
+    "descripcion": "Webcam Full HD con microfono integrado y autoenfoque",
+    "precio": "69.99",
+    "stock": 25,
+    "imagen": "https://images.unsplash.com/photo-1680868543815-b8666dba60f7?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Auriculares ANC",
+    "descripcion": "Auriculares over-ear con cancelacion de ruido y 30h de bateria",
+    "precio": "149.99",
+    "stock": 20,
+    "imagen": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "SSD Externo 1TB",
+    "descripcion": "SSD NVMe portatil con velocidades USB 3.2 Gen 2",
+    "precio": "109.99",
+    "stock": 35,
+    "imagen": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Lampara LED Escritorio",
+    "descripcion": "Lampara LED ajustable con puerto de carga USB",
+    "precio": "39.99",
+    "stock": 60,
+    "imagen": "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Soporte Smartphone",
+    "descripcion": "Soporte ajustable de aluminio para moviles y tablets",
+    "precio": "19.99",
+    "stock": 80,
+    "imagen": "https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Altavoz Bluetooth",
+    "descripcion": "Altavoz Bluetooth 5.0 compacto y resistente al agua",
+    "precio": "59.99",
+    "stock": 45,
+    "imagen": "https://images.unsplash.com/photo-1611472173362-3f53dbd65d80?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Tableta Grafica",
+    "descripcion": "Tableta grafica de 10 pulgadas con 8192 niveles de presion",
+    "precio": "199.99",
+    "stock": 12,
+    "imagen": "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Camara Accion 4K",
+    "descripcion": "Camara de accion 4K sumergible con estabilizacion de imagen",
+    "precio": "179.99",
+    "stock": 8,
+    "imagen": "https://images.unsplash.com/photo-1598134493179-51332e56807f?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Silla Gaming",
+    "descripcion": "Silla gaming ergonomica con soporte lumbar",
+    "precio": "249.99",
+    "stock": 5,
+    "imagen": "https://images.unsplash.com/photo-1540553016722-983e48a2cd10?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Kit Gestion Cables",
+    "descripcion": "Bridas de velcro y clips para mantener el escritorio ordenado",
+    "precio": "12.99",
+    "stock": 100,
+    "imagen": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Router Wi-Fi 6",
+    "descripcion": "Router dual-band Wi-Fi 6 AX3000",
+    "precio": "129.99",
+    "stock": 18,
+    "imagen": "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Regleta Inteligente",
+    "descripcion": "Regleta Wi-Fi con 4 tomas y puertos USB",
+    "precio": "44.99",
+    "stock": 22,
+    "imagen": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Funda Portatil 15\"",
+    "descripcion": "Funda impermeable para portatil con bolsillo para accesorios",
+    "precio": "24.99",
+    "stock": 70,
+    "imagen": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Reposamunecas",
+    "descripcion": "Reposamunecas de espuma viscoelastica para teclado y raton",
+    "precio": "17.99",
+    "stock": 90,
+    "imagen": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&h=300&fit=crop"
+  },
+  {
+    "producto": "Alfombrilla XL",
+    "descripcion": "Alfombrilla de escritorio antideslizante extragrande 90x40cm",
+    "precio": "34.99",
+    "stock": 0,
+    "imagen": "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=300&fit=crop"
+  }
+]
