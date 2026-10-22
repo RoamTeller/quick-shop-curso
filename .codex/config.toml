@@ -1,0 +1,7 @@
+[mcp_servers.codegraph]
+command = "C:/Program Files/nodejs/node.exe"
+args = ["C:/Users/mexca/AppData/Roaming/npm/node_modules/@colbymchenry/codegraph/npm-shim.js", "serve", "--mcp", "--path", "C:/Users/mexca/OneDrive/Documentos/home/Formación/Desarrollador con IA De escribir prompts al desarrollo con agentes/quick-shop-curso-main"]
+startup_timeout_sec = 60
+
+[mcp_servers.codegraph.env]
+CODEGRAPH_TELEMETRY = "0"

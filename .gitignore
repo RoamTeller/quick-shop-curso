@@ -73,3 +73,6 @@ opencode.json
 .playwright-mcp/
 frontend/test-results/
 frontend/playwright-report/
+
+# Índice local de CodeGraph
+.codegraph/
