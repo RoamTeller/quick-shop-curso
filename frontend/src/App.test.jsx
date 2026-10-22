@@ -42,6 +42,31 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 describe("QuickShop", () => {
+  it("explica el campo rechazado al registrarse y conserva los datos", async () => {
+    window.history.replaceState({}, "", "/registro");
+    fetch.mockImplementation(() =>
+      response({
+        detail: [{
+          loc: ["body", "password"],
+          type: "value_error",
+          msg: "Value error, Usa de 10 a 72 bytes, con mayúscula, minúscula, número y símbolo.",
+          input: "claveprivada123",
+        }],
+      }, 422),
+    );
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByLabelText("Nombre"), "Cliente Prueba");
+    await user.type(screen.getByLabelText("Email"), "test@example.com");
+    await user.type(screen.getByLabelText("Contraseña"), "claveprivada123");
+    await user.click(screen.getByRole("button", { name: "Crear mi cuenta" }));
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent("Contraseña: usa de 10 a 72 bytes");
+    expect(alert).not.toHaveTextContent("claveprivada123");
+    expect(screen.getByLabelText("Nombre")).toHaveValue("Cliente Prueba");
+    expect(screen.getByLabelText("Email")).toHaveValue("test@example.com");
+    expect(window.location.pathname).toBe("/registro");
+  });
   it("muestra el catálogo, filtra y deshabilita productos agotados", async () => {
     const user = userEvent.setup();
     render(<App />);
