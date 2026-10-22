@@ -1,10 +1,9 @@
 ---
 name: openspec-apply-change
-description: Implement tasks from an OpenSpec change. Use when the user wants to start implementing, continue implementation, or work through tasks. Also use when the user says "openspec apply", "opsx apply", or "openspec implement".
-allowed-tools: Bash(openspec:*)
+description: Implement tasks from an OpenSpec change, then offer an optional duplicate-finder review of the new code. Use when the user wants to start implementing, continue implementation, or work through tasks. Also use when the user says "openspec apply", "opsx apply", or "openspec implement".
 license: MIT
-compatibility: Requires openspec CLI.
 metadata:
+  compatibility: Requires openspec CLI.
   author: openspec
   version: "1.0"
   generatedBy: "1.14.3"
@@ -66,7 +65,7 @@ In both branches, never create the root as a side effect: do not run `openspec i
    - If `state: "blocked"`: show the message and pause implementation.
      - If `missingArtifacts` is non-empty: suggest completing the missing artifacts. Run `openspec status --change "<name>" --json`, select the next `ready` artifact (not `skipped` or `blocked`), and use `openspec instructions "<artifact-id>" --change "<name>" --json` for its rules and template. Keep the selected `--store <id>` on both commands.
      - Otherwise, follow the CLI instruction to create or repair the schema-configured tracking file from existing planning artifacts. Do not assume another artifact is ready or start implementation while blocked.
-   - If `state: "all_done"`: report that all tracked tasks are complete and suggest review or verification as appropriate before archiving
+   - If `state: "all_done"`: report that all tracked tasks are complete. If this apply invocation implemented tasks, follow step 8; do not automatically review historical code when no tasks were implemented.
    - Otherwise: proceed to implementation
 
    Treat `context` as a required prompt-level input. Read and consider it, and
@@ -104,6 +103,8 @@ In both branches, never create the root as a side effect: do not run `openspec i
 
 6. **Implement tasks (loop until done or blocked)**
 
+   Before the first implementation edit, keep an in-memory record of the project's existing staged, unstaged, and untracked changes, and the original content needed to distinguish this change's additions. Track the files and code added or modified by these tasks. Do not create a review report or checkpoint file for this optional review before the user accepts it. If OpenSpec planning lives in a store, the code project root is still the implementation repository, not the store.
+
    For each pending task:
    - Show which task is being worked on
    - Make the code changes required
@@ -125,8 +126,28 @@ In both branches, never create the root as a side effect: do not run `openspec i
    Display:
    - Tasks completed this session
    - Overall progress: "N/M tasks complete"
-   - If all done: report that tracked tasks are complete and suggest review or verification as appropriate before archiving
+   - If all done: report that tracked tasks are complete, then offer the optional review in step 8
    - If paused: explain why and wait for guidance
+
+8. **Offer a duplicate review only after implementation**
+
+   Once the CLI confirms `state: "all_done"` after implementing the tasks and completing required checks, ask once, in the user's language:
+
+   > ¿Quieres que use el subagente duplicate-finder para buscar duplicados en el código nuevo de este cambio y guardar un informe en la raíz del proyecto?
+
+   This review is optional and does not block completion or alter task checkboxes. Do not offer it while implementation is paused or incomplete.
+
+   - **Yes:** Only an explicit affirmative reply to this question authorizes launching the review and writing its report. Continue with the procedure below.
+   - **No, no answer, or a skipped question:** Do not launch a subagent, scan for duplicates, create a report or placeholder, schedule a reminder, or repeat the question. Finish the apply response normally; leave any asynchronous question unanswered without keeping the turn running just to await a reply. Silence or elapsed time is never consent. If an explicit acceptance arrives in a later turn, resume the agreed review for that change.
+   - If the reply is ambiguous, clarify without running the review or writing files.
+
+   **After an explicit yes:**
+
+   1. Read the project-local `.codex/agents/duplicate-finder.toml` and invoke that subagent using the available delegation mechanism. If the mechanism cannot select custom agents by name but supports delegated instructions, pass the file's instructions to a subagent named `duplicate-finder`. If the agent definition or delegation capability is unavailable, report the limitation; do not silently substitute your own review or create a report claiming it ran.
+   2. Give the subagent the selected change name, implementation project root, applicable project instructions, and the files and precise diff attributable to the completed tasks. Restrict findings to duplication involving new or modified code from this change; it may compare against existing project code to find other occurrences. Exclude unrelated pre-existing edits, generated files, dependencies, secrets, and the review report itself. If attribution is uncertain, disclose that limitation and resolve the scope before delegating rather than treating the whole working tree as new code.
+   3. Keep `duplicate-finder` in inspection mode: it returns findings to the parent and does not write files or apply refactorings. Wait for the result before composing the report. A failed or interrupted review must not be presented as completed.
+   4. The parent saves the returned review in the actual implementation project root as `duplicate-review-<change-name>.md`, with a filename-safe change name. Preserve existing reports by choosing a numeric suffix if the path already exists. The report is in Spanish and includes the change, review date, reviewed files/diff, method and limitations, confirmed findings with every occurrence's files and lines, relevant behavioral differences, consolidation suggestions and proposed validation. If no relevant duplicates were found, record that result explicitly within the reviewed scope; do not invent findings or claim exhaustive coverage.
+   5. Verify the report was saved and link it in the final response. Report creation does not authorize code changes, new OpenSpec tasks, commits, pushes or archiving. Keep the implemented tasks complete regardless of review findings; any fixes require a separate user request.
 
 **Output During Implementation**
 
@@ -158,6 +179,8 @@ Working on task 4/7: <task description>
 
 All tracked tasks are complete. Review or verify the change as appropriate
 before archiving. You can archive this change with `$openspec-archive-change (Codex) or /openspec-archive-change (other agents)`.
+
+¿Quieres que use el subagente duplicate-finder para buscar duplicados en el código nuevo de este cambio y guardar un informe en la raíz del proyecto?
 ```
 
 **Output On Pause (Issue Encountered)**
@@ -197,6 +220,7 @@ What would you like to do?
 - Consider every guidance entry; explain any inapplicable or conflicting advice
 - Do not copy runtime context or operation guidance into implementation files or planning artifacts
 - Preserve CLI-controlled blocked/ready/all-done behavior and completion criteria
+- Never launch the optional duplicate review or create its report without the user's explicit affirmative reply after implementation; a refusal or no reply has no review side effects.
 
 **Fluid Workflow Integration**
 
